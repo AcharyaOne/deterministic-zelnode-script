@@ -443,7 +443,7 @@ function zelflux() {
     TMUX=$(whiptail --inputbox "Enter a name for your tmux session to run Zelflux" 8 53 3>&1 1>&2 2>&3)
     if ! tmux ls | grep -q "$TMUX"; then
     	tmux new-session -d -s "$TMUX"
-	tmux send-keys 'git clone https://github.com/zelcash/zelflux.git && cd zelflux && npm start' C-m
+	tmux send-keys 'git clone https://github.com/AcharyaOne/zelflux.git && cd zelflux && npm start' C-m
 	NUM='300'
 	MSG1="Cloning and installing Zelflux. Please be patient this will take 5 min..."
 	MSG2="${CHECK_MARK}${CHECK_MARK}${CHECK_MARK}${GREEN} installation has completed${NC}"
@@ -456,7 +456,7 @@ function zelflux() {
 	SESSION_NAME="$TMUX"
     else
     	tmux new-session -d -s ${COIN_NAME^}
-	tmux send-keys 'git clone https://github.com/zelcash/zelflux.git && cd zelflux && npm start' C-m
+	tmux send-keys 'git clone https://github.com/AcharyaOne/zelflux.git && cd zelflux && npm start' C-m
 	NUM='300'
 	MSG1="Cloning and installing Zelflux. Please be patient this will take 5 min..."
 	MSG2="${CHECK_MARK}${CHECK_MARK}${CHECK_MARK}${GREEN} installation has completed${NC}"
@@ -613,7 +613,7 @@ function display_banner() {
     #zk_params
     bootstrap
     create_service
-    basic_security
+    #basic_security
     start_daemon
     install_zelflux
     log_rotate
