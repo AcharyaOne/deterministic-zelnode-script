@@ -39,7 +39,7 @@ USERNAME="$(whoami)"
 ZELFRONTPORT=16126
 LOCPORT=16127
 ZELNODEPORT=16128
-MDBPORT=27017
+MDBPORT=27018
 
 
 #color codes
@@ -277,11 +277,11 @@ function bootstrap() {
 
 function create_service() {
     echo -e "${YELLOW}Creating ${COIN_NAME^} service...${NC}"
-    sudo touch /etc/systemd/system/$COIN_NAME.service
-    sudo chown "$USERNAME":"$USERNAME" /etc/systemd/system/$COIN_NAME.service
-    cat << EOF > /etc/systemd/system/$COIN_NAME.service
+    sudo touch /etc/systemd/system/zelcash2.service
+    sudo chown "$USERNAME":"$USERNAME" /etc/systemd/system/zelcash2.service
+    cat << EOF > /etc/systemd/system/zelcash2.service
 [Unit]
-Description=$COIN_NAME service
+Description=zelcash2 service
 After=network.target
 [Service]
 Type=forking
@@ -300,10 +300,10 @@ StartLimitBurst=5
 [Install]
 WantedBy=multi-user.target
 EOF
-    sudo chown root:root /etc/systemd/system/$COIN_NAME.service
+    sudo chown root:root /etc/systemd/system/zelcash2.service
     sudo systemctl daemon-reload
     sleep 4
-    sudo systemctl enable $COIN_NAME.service > /dev/null 2>&1
+    sudo systemctl enable zelcash2.service > /dev/null 2>&1
 }
 
 function basic_security() {
@@ -415,9 +415,9 @@ function install_zelflux() {
 }
 
 function install_mongod() {
-    sudo apt-get update
-    sudo apt-get install mongodb-org -y
-    sudo service mongod start
+    #sudo apt-get update
+    #sudo apt-get install mongodb-org -y
+    sudo service mongod2 start
 }
 
 function install_nodejs() {
@@ -519,7 +519,7 @@ function restart_script() {
     touch /home/"$USERNAME"/restart_zelflux.sh
     cat << EOF > /home/"$USERNAME"/restart_zelflux.sh
 #!/bin/bash
-sudo service mongod start && sleep 5
+sudo service mongod2 start && sleep 5
 tmux new-session -d -s ${SESSION_NAME}
 tmux send-keys -t ${SESSION_NAME} "cd zelflux && npm start" C-m
 EOF
@@ -603,14 +603,14 @@ function display_banner() {
 #end of functions
 
 #run functions
-    wipe_clean
+    #wipe_clean
     ssh_port
     ip_confirm
     create_swap
-    install_packages
+    #install_packages
     create_conf
-    install_zel
-    zk_params
+    #install_zel
+    #zk_params
     bootstrap
     create_service
     basic_security
