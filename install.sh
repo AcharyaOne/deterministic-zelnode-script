@@ -393,8 +393,8 @@ function install_zelflux() {
 	install_nodejs
 	zelflux
     elif [[ $(lsb_release -r) = *18.04* ]]; then
-    	wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-	echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+    	#wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+	#echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
 	install_mongod
 	install_nodejs
 	zelflux
